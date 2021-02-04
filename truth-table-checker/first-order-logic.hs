@@ -93,3 +93,15 @@ demorgans_or_and =
 
 demorgans_proof :: IO ()
 demorgans_proof = assert demorgans_and_or >> assert demorgans_or_and -- Valid
+
+
+equal_equiv_iff :: Expr String Bool
+equal_equiv_iff =
+  let p = Var "p"
+      q = Var "q"
+      lhs = p `Equal` q
+      rhs = (p `Implies` q) `And` (q `Implies` p)
+  in  forall p $ forall q $ lhs `Equal` rhs
+
+equal_equiv_iff_proof :: IO ()
+equal_equiv_iff_proof = assert equal_equiv_iff -- Valid
